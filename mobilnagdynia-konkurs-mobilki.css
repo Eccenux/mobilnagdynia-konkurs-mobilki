@@ -121,6 +121,10 @@
     padding: .5em !important;
     margin: .5em !important;
   }
+  ul.art-hmenu a {
+    position: relative !important;
+    z-index: 200 !important;
+  }
   /* mniej istotne pozycje w menu */
   /*
   strona g³ówna,
