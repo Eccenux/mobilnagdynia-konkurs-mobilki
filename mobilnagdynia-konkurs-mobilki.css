@@ -4,7 +4,6 @@
 
 /* style w w¹skim oknie */
 @media only screen and (max-width: 1000px) {
-  
   /* uk³ad g³ówny */
   body {
     min-width: auto;
@@ -145,5 +144,20 @@
     }
   }
 
+  /* formularz dodawania */
+  .fabrikgrid_checkbox {
+    margin: .2em 0;
+    padding: .2em;
+  }
+  .fabrikGroup .row-fluid {
+    margin-top: .2em;
+  }
+  fieldset label {
+    width: auto !important;
+  }
+  #przejazd___data_przej_cal_cal_img
+  {
+    display: none;
+  }
 }
 }
