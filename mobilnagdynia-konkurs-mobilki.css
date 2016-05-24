@@ -134,6 +134,10 @@
   ul.art-hmenu li.item-241 {
     display: none !important;
   }
+  /* jakieœ dziwne pozycje (firmy) w menu "wyniki" */
+  ul.art-hmenu li.item-159 li[class^=item-4] {
+    display: none !important;
+  }
   /* jeszcze mniej pozycji w menu na w¹skim */
   @media only screen and (max-width: 400px) {
     /*
