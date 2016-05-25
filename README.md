@@ -3,6 +3,12 @@ Mobilna Mobilna Gdynia
 
 Czyli dostosowanie witryny konkursu rowerowego Mobilnej Gdyni dla urządzeń przenośnych (komórek i tabletów).
 
+Kod QR dla tej instrukcji:
+<img
+	src="qr_readme.png" alt="Readme QR"
+	width="200"
+/>
+
 Instalacja
 ----------
 
