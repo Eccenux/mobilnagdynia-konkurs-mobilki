@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.0
-// @description [2.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version     2.0.1
+// @description [2.0.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
-// @run-at		document-start
+// @run-at      document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
 // @downloadURL https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js
 // ==/UserScript==
@@ -232,6 +232,9 @@ function addCss() {
 	}
 }
 	`;
+	//var styleTag=document.createElement('style');
+	//styleTag.innerHTML = cssText;
+	//document.querySelector('head').appendChild(styleTag);
 	GM_addStyle(cssText);
 }
-addCss();
+document.addEventListener("DOMContentLoaded", addCss, false);
