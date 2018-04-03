@@ -13,15 +13,10 @@ Kod QR dla tej instrukcji:
 Instalacja
 ----------
 
-### Firefox ###
-1. Zainstaluj rozszerzenie Stylish.
-	https://addons.mozilla.org/pl/android/addon/stylish/
-2. Zainstaluj rozszerzenie USI.
-	https://addons.mozilla.org/pl/android/addon/userunified-script-injector/
-3. W Stylish dodaj styl (otwórz URL i skopiuj do Stylish):
-	https://goo.gl/EVjfNV
-4. W USI zainstaluj JS (wystarczy otworzyć URL w Firefox):
-	https://goo.gl/Go0qwJ
+### Firefox (mobile) ###
+1. Zainstaluj [Firefoksa (wersja na Android)](https://play.google.com/store/apps/details?id=org.mozilla.firefox&hl=pl) (jeśli jeszcze nie masz).
+2. Zainstaluj [TamperMonkey](https://addons.mozilla.org/pl/firefox/addon/tampermonkey/) (jeśli jeszcze nie masz).
+3. Jak już masz TM &rarr; **[zainstaluj skrypt](https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js)**.
 
 Wygląd po instalacji
 --------------------
