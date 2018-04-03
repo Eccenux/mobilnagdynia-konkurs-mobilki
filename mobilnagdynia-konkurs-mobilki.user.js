@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
+// @version     2.0
 // @description [2.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
-// @version     2.0
 // @grant       GM_addStyle
 // @run-at		document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
@@ -16,8 +16,8 @@
 */
 function addViewport() {
 	var metaTag=document.createElement('meta');
-	metaTag.name = "viewport"
-	metaTag.content = "width=device-width, initial-scale=1.0"
+	metaTag.name = "viewport";
+	metaTag.content = "width=device-width, initial-scale=1.0";
 	document.querySelector('head').appendChild(metaTag);
 }
 addViewport();
