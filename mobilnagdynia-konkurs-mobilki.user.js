@@ -217,9 +217,15 @@ function addCss() {
 		ul.art-hmenu li.item-245 {
 			display: none !important;
 		}
+		/* mniejsze logo */
 		.art-logo {
 			width: 2em;
 			opacity: .7;
+		}
+		/* ukrycie nieczytelnych elementów artykułu (za szeroki obrazek i tabelka) */
+		.art-article > table,
+		.art-article > p > img {
+			display: none !important;
 		}
 	}
 
