@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.0.2
-// @description [2.0.2] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version     2.1.0
+// @description [2.1.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", enhanceForm, false);
 
 /**
 	Dodanie CSS.
-	Kopia z: `mobilnagdynia-konkurs-mobilki.css`
 */
 function addCss() {
 	var cssText = `
@@ -227,6 +226,11 @@ function addCss() {
 		.art-article > p > img {
 			display: none !important;
 		}
+		/* przymulające ozdobniki - FB i animacja z logo */
+		#showplus_images_logafirm,
+		#fb-root {
+			display: none !important;
+		}
 	}
 
 	/* formularz dodawania */
@@ -250,5 +254,26 @@ function addCss() {
 	//styleTag.innerHTML = cssText;
 	//document.querySelector('head').appendChild(styleTag);
 	GM_addStyle(cssText);
+
+	dynamicStyle();
 }
 document.addEventListener("DOMContentLoaded", addCss, false);
+
+/**
+ * Dodatkowe, dynamiczne style.
+ */
+function dynamicStyle() {
+	function isHidden(el) {
+		var style = window.getComputedStyle(el);
+		return (style.display === 'none')
+	}
+	// hide facebook parent if hidden
+	try {
+		if (isHidden(document.querySelector('#fb-root'))) {
+			document.querySelector('#fb-root').parentNode.parentNode.parentNode.style.display="none"
+		}
+	} catch (error) {
+		
+	}
+}
+//document.addEventListener("DOMContentLoaded", dynamicStyle, false);
