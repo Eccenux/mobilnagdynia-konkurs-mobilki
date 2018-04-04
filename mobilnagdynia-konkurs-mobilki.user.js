@@ -198,7 +198,7 @@ function addCss() {
 		display: none !important;
 	}
 	/* jakieś dziwne pozycje (firmy) w menu "wyniki" */
-	ul.art-hmenu li.item-159 li[class^=item-4] {
+	ul.art-hmenu li.item-159 > a {
 		display: none !important;
 	}
 	/* jeszcze mniej pozycji w menu na wąskim */
@@ -206,12 +206,20 @@ function addCss() {
 		/*
 		zasady,
 		profil,
-		kontakt
+		kontakt,
+		liczba kilometrów (i tak nieczytelne)
+		rejestracja
 		*/
 		ul.art-hmenu li.item-142,
 		ul.art-hmenu li.item-141,
-		ul.art-hmenu li.item-146 {
+		ul.art-hmenu li.item-146,
+		ul.art-hmenu li.item-160,
+		ul.art-hmenu li.item-245 {
 			display: none !important;
+		}
+		.art-logo {
+			width: 2em;
+			opacity: .7;
 		}
 	}
 
