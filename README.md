@@ -1,7 +1,7 @@
-Mobilna Mobilna Gdynia
-======================
+Konkurs Rowerowy na mobilki
+===========================
 
-Czyli dostosowanie witryny konkursu rowerowego Mobilnej Gdyni dla urządzeń przenośnych (komórek i tabletów).
+Czyli dostosowanie [witryny konkursu rowerowego Mobilnej Gdyni](https://dopracyjaderowerem.mobilnagdynia.pl/) dla urządzeń przenośnych (komórek i tabletów).
 
 Kod QR dla tej instrukcji:
 
