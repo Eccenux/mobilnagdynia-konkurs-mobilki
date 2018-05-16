@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.1.0
-// @description [2.1.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version     2.1.1
+// @description [2.1.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
@@ -207,12 +207,16 @@ function addCss() {
 		profil,
 		kontakt,
 		liczba kilometrów (i tak nieczytelne)
+		Średnia liczba kilometrów (j/w)
+		Liczba przejazdów (j/w)
 		rejestracja
 		*/
 		ul.art-hmenu li.item-142,
 		ul.art-hmenu li.item-141,
 		ul.art-hmenu li.item-146,
 		ul.art-hmenu li.item-160,
+		ul.art-hmenu li.item-488,
+		ul.art-hmenu li.item-489,
 		ul.art-hmenu li.item-245 {
 			display: none !important;
 		}
