@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.1.1
-// @description [2.1.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version     2.2.1
+// @description [2.2.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
@@ -39,10 +39,10 @@ function enhanceForm() {
 		kierunek.style.display = 'none';
 		var kierunekSimple = document.createElement('div');
 		//kierunekSimple.style.cssText = "margin: .2em 0 1em";
-		kierunekSimple.innerHTML = ''
-			+ '<label><input type="radio" name="ignore__przejazd___Podroz" value="do pracy" />do pracy</label>'
-			+ '<label><input type="radio" name="ignore__przejazd___Podroz" value="z pracy" />z pracy</label>'
-		;
+		kierunekSimple.innerHTML = `
+			<label><input type="radio" name="ignore__przejazd___Podroz" value="do pracy" />do pracy</label>
+			<label><input type="radio" name="ignore__przejazd___Podroz" value="z pracy" />z pracy</label>
+		`;
 		kierunekSimple.addEventListener("click", function(e) {
 			if(e.target && e.target.nodeName.toLowerCase() === "input") {
 				console.log(e.target.value);
@@ -50,7 +50,7 @@ function enhanceForm() {
 				// Create a new 'change' event
 				var event = new Event('change');
 				// Dispatch it.
-				kierunek.dispatchEvent(event)			
+				kierunek.dispatchEvent(event);
 			}
 		});
 		kierunek.parentNode.appendChild(kierunekSimple);
@@ -177,6 +177,11 @@ function addCss() {
 	ul.art-hmenu a
 	{
 		background-color: rgba(0,0,0,0.1) !important;
+		color: white  !important;
+	}
+	ul.art-hmenu .current > a
+	{
+		color: #fee459 !important;
 	}
 	ul.art-hmenu a
 	{
@@ -269,15 +274,15 @@ document.addEventListener("DOMContentLoaded", addCss, false);
 function dynamicStyle() {
 	function isHidden(el) {
 		var style = window.getComputedStyle(el);
-		return (style.display === 'none')
+		return (style.display === 'none');
 	}
 	// hide facebook parent if hidden
 	try {
 		if (isHidden(document.querySelector('#fb-root'))) {
-			document.querySelector('#fb-root').parentNode.parentNode.parentNode.style.display="none"
+			document.querySelector('#fb-root').parentNode.parentNode.parentNode.style.display="none";
 		}
 	} catch (error) {
-		
+
 	}
 }
 //document.addEventListener("DOMContentLoaded", dynamicStyle, false);

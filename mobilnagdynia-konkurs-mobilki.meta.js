@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.1.1
-// @description [2.1.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version     2.2.1
+// @description [2.2.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
