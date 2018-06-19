@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name        Konkurs Rowerowy mobilki
+// @name		Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version     2.2.1
-// @description [2.2.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
-// @include     http://dopracyjaderowerem.mobilnagdynia.pl/*
-// @include     https://dopracyjaderowerem.mobilnagdynia.pl/*
-// @grant       GM_addStyle
-// @run-at      document-start
+// @version	 2.2.2
+// @description [2.2.2] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @include	 http://dopracyjaderowerem.mobilnagdynia.pl/*
+// @include	 https://dopracyjaderowerem.mobilnagdynia.pl/*
+// @grant	   GM_addStyle
+// @run-at	  document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
 // @downloadURL https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js
 // ==/UserScript==
@@ -30,7 +30,16 @@ function enhanceForm() {
 	var km = document.getElementById('przejazd___Liczba_przejechanych_km_na_rowerze');
 	if (km) {
 		km.setAttribute('type', 'number');
-		km.value='';
+		km.value = '';
+		// odtworzenie
+		var prevKmValue = localStorage.getValue('prev_val_' + km.id);
+		if (prevKmValue && prevKmValue.length) {
+			km.value = prevKmValue;
+		}
+		// zapis
+		km.addEventListener('change', function(){
+			localStorage.setValue('prev_val_' + km.id, km.value);
+		});
 	}
 
 	// dwie wartości w select? bez sensu...
