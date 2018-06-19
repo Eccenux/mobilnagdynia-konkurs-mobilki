@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name		Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version	    2.3.0
-// @description [2.3.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version	    2.3.1
+// @description [2.3.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include	    http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include	    https://dopracyjaderowerem.mobilnagdynia.pl/*
-// @grant	    GM_addStyle
+// @grant       GM_addStyle
 // @run-at	    document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
 // @downloadURL https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js
@@ -23,34 +23,6 @@ function addViewport() {
 addViewport();
 
 /**
- * Parsowanie daty w formacie d-m-y.
- */
-function parseDate(value) {
-	var dt = new Date();
-	value.replace(/(\d+)-(\d+)-(\d+)/, function(a, d, m, y) {
-		dt = new Date(`${y}-${m}-${d}`);
-	});
-	return dt;
-}
-
-/**
- * Zwraca liczbę z przynajmniej dwoma cyframi.
- */
-function twoDigits(n){
-    return n > 9 ? "" + n: "0" + n;
-}
-
-/**
- * Formatowanie daty do formatu d-m-y.
- */
-function formatDate(dt) {
-	var d = twoDigits(dt.getDate()),
-		m = twoDigits(dt.getMonth() + 1),
-		y = dt.getFullYear();
-	return `${d}-${m}-${y}`;
-}
-
-/**
  * Usprawnienia dla daty przejazdu.
  */
 function dataPrzejazduEnhance() {
@@ -65,25 +37,38 @@ function dataPrzejazduEnhance() {
 	`;
 	document.querySelector('.fb_el_przejazd___data_przej').appendChild(buttonsContainer);
 
-	var dataPrzejazdu = document.querySelector('#przejazd___data_przej_cal');
-	
+	// not ready on-load so have to get it each time
+	function getField() {
+		return unsafeWindow.Fabrik.blocks['form_1'].formElements.przejazd___data_przej;
+	}
+	function updateField(dt) {
+		var dataPrzejazduFabrik = getField();
+		dataPrzejazduFabrik.update(dt);
+	}
+	function readField() {
+		var dataPrzejazduFabrik = getField();
+		var value = dataPrzejazduFabrik.getValue();
+		return new Date(value);
+	}
+
 	var buttons = buttonsContainer.querySelectorAll('button');
 	// poprzedni
 	buttons[0].onclick = function() {
-		var dt = parseDate(dataPrzejazdu.value);
+		var dt = readField();
 		dt.setDate(dt.getDate() - 1);
-		dataPrzejazdu.value = formatDate(dt);
+		updateField(dt);
 	};
 	// następny
-	buttons[2] = function() {
-		var dt = parseDate(dataPrzejazdu.value);
+	buttons[2].onclick = function() {
+		var dt = readField();
 		dt.setDate(dt.getDate() + 1);
-		dataPrzejazdu.value = formatDate(dt);
+		updateField(dt);
 	};
 	// dziś
-	buttons[1] = function() {
+	buttons[1].onclick = function() {
 		var dt = new Date();
-		dataPrzejazdu.value = formatDate(dt);
+		dt.setHours(0,0,0,0); // midnight
+		updateField(dt);
 	};
 }
 
