@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name		Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version	    2.3.1
-// @description [2.3.1] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version	    2.3.2
+// @description [2.3.2] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include	    http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include	    https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
@@ -26,18 +26,20 @@ addViewport();
  * Usprawnienia dla daty przejazdu.
  */
 function dataPrzejazduEnhance() {
-	// przyciski
+	// "przyciski"
 	var buttonsContainer = document.createElement('div');
 	buttonsContainer.className = 'btn-group';
 	buttonsContainer.style.cssText = 'margin:.5em 0 1em';
+	// użyte linki, bo Fabrik dziwnie reaguje na przyciski <button>
+	// (dolny przycisk jest wyłączany; `updateField` trzeba robić w `setTimeout`)
 	buttonsContainer.innerHTML = `
-		<button class="btn button art-button">&lt;</button>
-		<button class="btn button art-button">dziś</button>
-		<button class="btn button art-button">&gt;</button>
+		<a href="javascript:void(0)" class="art-button">&lt;</a>
+		<a href="javascript:void(0)" class="art-button">dziś</a>
+		<a href="javascript:void(0)" class="art-button">&gt;</a>
 	`;
 	document.querySelector('.fb_el_przejazd___data_przej').appendChild(buttonsContainer);
 
-	// not ready on-load so have to get it each time
+	// Fabrik nie jest gotowy od razu, dlatego pobieranie pola za każdym razem
 	function getField() {
 		return unsafeWindow.Fabrik.blocks['form_1'].formElements.przejazd___data_przej;
 	}
@@ -51,7 +53,7 @@ function dataPrzejazduEnhance() {
 		return new Date(value);
 	}
 
-	var buttons = buttonsContainer.querySelectorAll('button');
+	var buttons = buttonsContainer.querySelectorAll('a');
 	// poprzedni
 	buttons[0].onclick = function() {
 		var dt = readField();
