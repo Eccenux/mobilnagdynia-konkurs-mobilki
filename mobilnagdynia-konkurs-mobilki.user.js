@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name		Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version	 2.2.2
-// @description [2.2.2] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
-// @include	 http://dopracyjaderowerem.mobilnagdynia.pl/*
-// @include	 https://dopracyjaderowerem.mobilnagdynia.pl/*
-// @grant	   GM_addStyle
-// @run-at	  document-start
+// @version	    2.3.0
+// @description [2.3.0] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @include	    http://dopracyjaderowerem.mobilnagdynia.pl/*
+// @include	    https://dopracyjaderowerem.mobilnagdynia.pl/*
+// @grant	    GM_addStyle
+// @run-at	    document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
 // @downloadURL https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js
 // ==/UserScript==
@@ -23,14 +23,87 @@ function addViewport() {
 addViewport();
 
 /**
+ * Parsowanie daty w formacie d-m-y.
+ */
+function parseDate(value) {
+	var dt = new Date();
+	value.replace(/(\d+)-(\d+)-(\d+)/, function(a, d, m, y) {
+		dt = new Date(`${y}-${m}-${d}`);
+	});
+	return dt;
+}
+
+/**
+ * Zwraca liczbę z przynajmniej dwoma cyframi.
+ */
+function twoDigits(n){
+    return n > 9 ? "" + n: "0" + n;
+}
+
+/**
+ * Formatowanie daty do formatu d-m-y.
+ */
+function formatDate(dt) {
+	var d = twoDigits(dt.getDate()),
+		m = twoDigits(dt.getMonth() + 1),
+		y = dt.getFullYear();
+	return `${d}-${m}-${y}`;
+}
+
+/**
+ * Usprawnienia dla daty przejazdu.
+ */
+function dataPrzejazduEnhance() {
+	// przyciski
+	var buttonsContainer = document.createElement('div');
+	buttonsContainer.className = 'btn-group';
+	buttonsContainer.style.cssText = 'margin:.5em 0 1em';
+	buttonsContainer.innerHTML = `
+		<button class="btn button art-button">&lt;</button>
+		<button class="btn button art-button">dziś</button>
+		<button class="btn button art-button">&gt;</button>
+	`;
+	document.querySelector('.fb_el_przejazd___data_przej').appendChild(buttonsContainer);
+
+	var dataPrzejazdu = document.querySelector('#przejazd___data_przej_cal');
+	
+	var buttons = buttonsContainer.querySelectorAll('button');
+	// poprzedni
+	buttons[0].onclick = function() {
+		var dt = parseDate(dataPrzejazdu.value);
+		dt.setDate(dt.getDate() - 1);
+		dataPrzejazdu.value = formatDate(dt);
+	};
+	// następny
+	buttons[2] = function() {
+		var dt = parseDate(dataPrzejazdu.value);
+		dt.setDate(dt.getDate() + 1);
+		dataPrzejazdu.value = formatDate(dt);
+	};
+	// dziś
+	buttons[1] = function() {
+		var dt = new Date();
+		dataPrzejazdu.value = formatDate(dt);
+	};
+}
+
+/**
 	Usprawnienia formularza.
 */
 function enhanceForm() {
+	// data przejazdu
+	dataPrzejazduEnhance();
+
 	// km numeryczne i bez domyślnie wpisanego 0
 	var km = document.getElementById('przejazd___Liczba_przejechanych_km_na_rowerze');
 	if (km) {
 		km.setAttribute('type', 'number');
 		km.value = '';
+		/*
+// @grant       GM_getValue
+// @grant       GM_setValue
+		GM_getValue(name, defaultValue);
+		GM_setValue(name, value);
 		// odtworzenie
 		var prevKmValue = localStorage.getValue('prev_val_' + km.id);
 		if (prevKmValue && prevKmValue.length) {
@@ -40,6 +113,7 @@ function enhanceForm() {
 		km.addEventListener('change', function(){
 			localStorage.setValue('prev_val_' + km.id, km.value);
 		});
+		*/
 	}
 
 	// dwie wartości w select? bez sensu...
@@ -67,7 +141,6 @@ function enhanceForm() {
 }
 //window.addEventListener ("load", enhanceForm, false);
 document.addEventListener("DOMContentLoaded", enhanceForm, false);
-
 /**
 	Dodanie CSS.
 */
