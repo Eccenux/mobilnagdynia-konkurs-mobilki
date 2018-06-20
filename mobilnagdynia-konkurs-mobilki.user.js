@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name		Konkurs Rowerowy mobilki
 // @namespace   pl.enux.mobilnagdynia
-// @version	    2.3.2
-// @description [2.3.2] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
+// @version	    2.3.3
+// @description [2.3.3] Dostosowuje witrynę do urządzeń mobilnych (komórki itp).
 // @include	    http://dopracyjaderowerem.mobilnagdynia.pl/*
 // @include	    https://dopracyjaderowerem.mobilnagdynia.pl/*
 // @grant       GM_addStyle
+// @grant       GM_getValue
+// @grant       GM_setValue
 // @run-at	    document-start
 // @updateURL   https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.meta.js
 // @downloadURL https://github.com/Eccenux/mobilnagdynia-konkurs-mobilki/raw/master/mobilnagdynia-konkurs-mobilki.user.js
@@ -91,21 +93,15 @@ function enhanceForm() {
 	if (km) {
 		km.setAttribute('type', 'number');
 		km.value = '';
-		/*
-// @grant       GM_getValue
-// @grant       GM_setValue
-		GM_getValue(name, defaultValue);
-		GM_setValue(name, value);
 		// odtworzenie
-		var prevKmValue = localStorage.getValue('prev_val_' + km.id);
+		var prevKmValue = GM_getValue(km.id, null);
 		if (prevKmValue && prevKmValue.length) {
 			km.value = prevKmValue;
 		}
 		// zapis
 		km.addEventListener('change', function(){
-			localStorage.setValue('prev_val_' + km.id, km.value);
+			GM_setValue(km.id, km.value);
 		});
-		*/
 	}
 
 	// dwie wartości w select? bez sensu...
