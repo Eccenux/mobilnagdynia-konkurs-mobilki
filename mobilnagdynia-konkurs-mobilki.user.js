@@ -26,6 +26,11 @@ addViewport();
  * Usprawnienia dla daty przejazdu.
  */
 function dataPrzejazduEnhance() {
+	var fieldContainer = document.querySelector('.fb_el_przejazd___data_przej');
+	if (!fieldContainer) {
+		return;
+	}
+
 	// "przyciski"
 	var buttonsContainer = document.createElement('div');
 	buttonsContainer.className = 'btn-group';
@@ -37,7 +42,7 @@ function dataPrzejazduEnhance() {
 		<a href="javascript:void(0)" class="art-button">dziś</a>
 		<a href="javascript:void(0)" class="art-button">&gt;</a>
 	`;
-	document.querySelector('.fb_el_przejazd___data_przej').appendChild(buttonsContainer);
+	fieldContainer.appendChild(buttonsContainer);
 
 	// Fabrik nie jest gotowy od razu, dlatego pobieranie pola za każdym razem
 	function getField() {
